@@ -77,9 +77,9 @@ def get_image(name):
     return pygame.image.load(os.path.join(spriteFolderPath, name)).convert_alpha()
     
 try:
-    hs = read_data("high_score.data")
+    hs = read_data("assets\high_score.data")
 except:
-    write_data("high_score.data", 0)
+    write_data("assets\high_score.data", 0)
     hs = 0
 
 
@@ -464,7 +464,7 @@ while running:
         if d_sound == 0:
             pygame.mixer.music.stop()
             die_sound.play()
-            write_data("high_score.data", hs)
+            write_data("assets\high_score.data", hs)
             d_sound = 1
 
 
@@ -488,8 +488,6 @@ while running:
 
     if score >= hs:
         hs = score
-
-
 
     ## DEBUG:
     pressed = pygame.key.get_pressed()
