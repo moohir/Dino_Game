@@ -28,29 +28,16 @@ pygame.display.set_caption("Dino Game")
 
 def read_data(name):
     # If the code is frozen, use this path:
-    if getattr(sys, 'frozen', False):
-        CurrentPath = sys._MEIPASS
-    # If it's not use the path we're on now
-    else:
-        CurrentPath = os.path.dirname(__file__)
-
+    CurrentPath = os.getenv('APPDATA')
     file = open(os.path.join(CurrentPath, name), 'rb')
-
     load = pickle.load(file)
     return load
 
 def write_data(name, data):
     # If the code is frozen, use this path:
-    if getattr(sys, 'frozen', False):
-        CurrentPath = sys._MEIPASS
-    # If it's not use the path we're on now
-    else:
-        CurrentPath = os.path.dirname(__file__)
-
+    CurrentPath = os.getenv('APPDATA')
     file = open(os.path.join(CurrentPath, name), 'wb')
-
     pickle.dump(data, file)
-
     file.close()
 
 def get_sound(name):
@@ -80,9 +67,9 @@ def get_image(name):
     return pygame.image.load(os.path.join(spriteFolderPath, name)).convert_alpha()
     
 try:
-    hs = read_data("assets\high_score.data")
+    hs = read_data("DinoGame\high_score.data")
 except:
-    write_data("assets\high_score.data", 0)
+    write_data("DinoGame\high_score.data", 0)
     hs = 0
 
 
@@ -467,7 +454,7 @@ while running:
         if d_sound == 0:
             pygame.mixer.music.stop()
             die_sound.play()
-            write_data("assets\high_score.data", hs)
+            write_data("DinoGame\high_score.data", hs)
             d_sound = 1
 
 
